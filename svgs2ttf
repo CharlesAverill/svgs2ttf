@@ -1,5 +1,6 @@
 #!/usr/bin/fontforge -script
 
+import fontforge
 import sys
 import os.path
 import json
@@ -58,8 +59,10 @@ def main(config_file):
     font = fontforge.font()
     setProperties(font, config)
     addGlyphs(font, config)
+    font.selection.all()
+    font.autoWidth(20)
     for outfile in config['output']:
-        sys.stderr.write('Generating %s...\n' % outfile)
+        # sys.stderr.write('Generating %s...\n' % outfile)
         font.generate(outfile)
 
 if __name__ == '__main__':
